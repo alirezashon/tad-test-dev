@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import styles from './index.module.css'
+import { useState } from 'react'
 
 const Footer = dynamic(() => import('../components/Footer'), {
   loading: () => <div className={styles.loadingFooter}></div>,
@@ -7,15 +8,16 @@ const Footer = dynamic(() => import('../components/Footer'), {
 const Header = dynamic(() => import('../components/Header'), {
   loading: () => <div className={styles.loadingHeader}></div>,
 })
-const Menu = dynamic(() => import('../components/Menu'), {
-  loading: () => <div className={styles.loadingMenu}></div>,
+const Drawer = dynamic(() => import('../components/Drawer'), {
+  loading: () => <div className={styles.loadingDrawer}></div>,
 })
 const Layout = ({ children }: any) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
   return (
     <div className={styles.layout}>
       <Header />
-      <Menu />
-      <main className={styles.mainContainer}></main>
+      <Drawer setDrawerOpen={setIsDrawerOpen} />
+      <main className={styles.mainContainer}>{children}</main>
       <Footer />
     </div>
   )

@@ -3,7 +3,7 @@ import PageHeader from '../Header/Page'
 import { handleAccess } from '../../constants/functions'
 import FormHeader from '../Form/Header'
 import { getPlateInquiry } from '../../utils/User'
-
+import styles from './index.module.css'
 const Inquiry = () => {
   const iranFlag = '/images/iran.png'
 
@@ -60,38 +60,38 @@ const Inquiry = () => {
   }
 
   return (
-    <div className='layoutContainer'>
+    <div className={styles.layoutContainer}>
       <PageHeader title={'استعلام اولیه'} />
-      <form onSubmit={handleSubmit} className='mainForm'>
-        <div className='formContainer plateForm'>
+      <form onSubmit={handleSubmit} className={styles.mainForm}>
+        <div className={`${styles.formContainer} ${styles.plateForm}`}>
           <FormHeader text={'شماره پلاک'} />
 
-          <div className='plateInput'>
-            <div className='plateCountryInputs'>
+          <div className={styles.plateInput}>
+            <div className={styles.plateCountryInputs}>
               <span>ایران</span>
-              <div className='plateInputs'>
-                <input name='country2' type='text' className='input' />
-                <input name='country1' type='text' className='input' />
+              <div className={styles.plateInputs}>
+                <input name='country2' type='text' className={styles.input} />
+                <input name='country1' type='text' className={styles.input} />
               </div>
             </div>
-            <div className='plateMainInputsContainer'>
+            <div className={styles.plateMainInputsContainer}>
               <div className='plateInputs'>
-                <input name='part2num3' type='text' className='input' />
-                <input name='part2num2' type='text' className='input' />
-                <input name='part2num1' type='text' className='input' />
+                <input name='part2num3' type='text' className={styles.input} />
+                <input name='part2num2' type='text' className={styles.input} />
+                <input name='part2num1' type='text' className={styles.input} />
               </div>
-              <div className='plateLetter'>
-                <input name='plateLetter' type='text' className='input' />
+              <div className={styles.plateLetter}>
+                <input name='plateLetter' type='text' className={styles.input} />
               </div>
 
-              <div className='plateInputs'>
-                <input name='part1num2' type='text' className='input' />
-                <input name='part1num1' type='text' className='input' />
+              <div className={styles.plateInputs}>
+                <input name='part1num2' type='text' className={styles.input} />
+                <input name='part1num1' type='text' className={styles.input} />
               </div>
             </div>
 
-            <div className='blueFlag'>
-              <img src={iranFlag} alt='iran flag' className='iranFlag' />
+            <div className={styles.blueFlag}>
+              <img src={iranFlag} alt='iran flag' className={styles.iranFlag} />
               <span>I.R.</span>
               <span>IRAN</span>
             </div>

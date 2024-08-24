@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { handleAccess } from '../../constants/functions'
 
 const Dashboard = () => {
-  const roleName = localStorage.getItem('roleName')
-  console.log(roleName)
 
-  const pageName = 'Page1'
-  console.log(pageName)
-
+  
   const [control, setControl] = useState('') // Using useState to manage control state
-
+  
   useEffect(() => {
+    const roleName = localStorage.getItem('roleName')
+    console.log(roleName)
+    
+    const pageName = 'Page1'
+    console.log(pageName)
     const fetchControl = async () => {
       try {
         const result = await handleAccess(pageName) // Await the result of handleAccess
@@ -21,7 +22,7 @@ const Dashboard = () => {
     }
 
     fetchControl() // Call the async function
-  }, [pageName]) // Dependency array includes pageName
+  }, []) // Dependency array includes pageName
 
   return (
     <div>

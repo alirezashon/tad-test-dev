@@ -1,12 +1,8 @@
 import { UserLogin, UserRole } from '@/interfaces'
 
-const url = 'https://192.168.1.102'
+const url = 'https://192.168.1.103'
 
 export const userLogin = async (inputs: UserLogin) => {
-  const newUser = {
-    userName: inputs.username,
-    userPassword: inputs.password,
-  }
 
   try {
     const res = await fetch(`${url}/api/UserMng/userLogin`, {
@@ -22,8 +18,8 @@ export const userLogin = async (inputs: UserLogin) => {
       }),
     })
     const result = await res.json()
-
-    if (result.data.resCode > 0) {
+    console.log(result)
+    if (result?.data?.resCode > 0) {
       if (
         result.data &&
         result.data.resInfo &&

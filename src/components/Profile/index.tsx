@@ -1,10 +1,10 @@
-import Tooltip from '../Tooltip/index.jsx'
+import Tooltip from '../Tooltip/'
 import styles from './index.module.css'
 import Image from 'next/image'
 
 const Profile = () => {
-  const profile = '/icons/profile.svg'
-  const arrow = '/icons/arrow-next.svg'
+  const profile = '/icons/profile.png'
+  const arrow = '/icons/direction.png'
 
   const logOut = () => {
     localStorage.removeItem('token')

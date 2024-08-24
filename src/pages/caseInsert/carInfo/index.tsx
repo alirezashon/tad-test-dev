@@ -1,2 +1,10 @@
+import Layout from '@/Layout'
 import CarInfo from '../../../components/CarInfo'
-export default CarInfo
+const Car = ()=>{
+    return(
+        <Layout>
+            <CarInfo/>
+        </Layout>
+    )
+}
+export default Car

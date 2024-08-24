@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormHeader from '../Form/Header'
 import PageHeader from '../Header/Page'
 import Input from '../Form/Input'
-
+import styles from './index.module.css'
 const PersonInfo = () => {
   const [inquiryResult, setInquiryResult] = useState(null); // Initialize state to null
 
@@ -24,10 +24,10 @@ const PersonInfo = () => {
 
   }
   return (
-    <div className="layoutContainer">
+    <div className={styles.layoutContainer}>
       <PageHeader title={"اطلاعات فردی"} />
-      <form onSubmit={handleSubmit} className="mainForm">
-        <div className="formContainer">
+      <form onSubmit={handleSubmit} className={styles.mainForm}>
+        <div className={styles.formContainer}>
           <p>نام و نام خانوادگی: {inquiryResult&& inquiryResult?.insNam}</p>
           <p>کد ملی: {inquiryResult&& inquiryResult.ntnlId}</p>
           <p>کد بیمه نامه: {inquiryResult&& inquiryResult.plcyUnqCod}</p>

@@ -1,0 +1,45 @@
+/** @format */
+.drawer {
+  background-color: #0099a8;
+  border-right: dashed #6ad5de 0.1vh;
+  position: fixed;
+}
+.item {
+  background: linear-gradient(225deg, #f2feff, #effeff, #f3feff);
+  width: 98%;
+}
+.menuBars {
+  margin-right: 25%;
+  width: 5vh;
+  height: 5vh;
+  rotate: 180deg;
+}
+.headerLogo{
+  width: 80%;
+  margin: 10%;
+  height: 10vh;
+}
+.iconBox {
+  margin: 4vh 0;
+}
+.icon {
+  width: 5vh;
+  height: 5vh;
+}
+.iconBox:first-child {
+  margin: 0;
+}
+.iconBox:hover {
+  cursor: pointer;
+  margin: 2vh 0;
+  transition: all 0.5s;
+  border-right: 1px solid rgb(68, 118, 76);
+}
+.iconName {
+  font-size: 2vh;
+}
+@media (max-width: 777px) {
+  .icon {
+    font-size: 3vh;
+  }
+}

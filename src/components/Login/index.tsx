@@ -1,34 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import { handleAccess } from '../../constants/functions'
+import React, { useState } from 'react'
+import { userLogin } from '../../utils/User'
+import styles from './index.module.css'
+import Image from 'next/image'
+const Login = () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    const formElement = e.target
 
-const Dashboard = () => {
-  const roleName = localStorage.getItem('roleName')
-  console.log(roleName)
+    if (formElement) {
+      const formData = new FormData(formElement)
 
-  const pageName = 'Page1'
-  console.log(pageName)
+      const username = formData.get('username')
+      const password = formData.get('password')
 
-  const [control, setControl] = useState('') // Using useState to manage control state
-
-  useEffect(() => {
-    const fetchControl = async () => {
-      try {
-        const result = await handleAccess(pageName) // Await the result of handleAccess
-        setControl(result) // Set the result to the state
-      } catch (error) {
-        console.error('Error fetching control:', error)
-      }
+      await userLogin({ username: `${username}`, password: `${password}` })
     }
 
-    fetchControl() // Call the async function
-  }, [pageName]) // Dependency array includes pageName
+    location.href = '/dashboard'
+  }
+  const logo = '/images/logo.png'
+  const slogan = '/images/slogan.png'
+  const eyeIcon = '/icons/eye.svg'
+  const eyeClose = '/icons/eye-closed.svg'
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible)
+  }
 
   return (
-    <div>
-      Dashboard
-      <div>Controls: {control}</div> {/* Display the control */}
-    </div>
+    <main className={styles.container}>
+      <div className={styles.formBox}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>ورود به سامانه</h1>
+          <p className={styles.description}>
+            لطفا اطلاعات خود را برای ورود به سامانه وارد کنید.
+          </p>
+        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.inputGroup}>
+            <span>نام کاربری</span>
+            <input type='text' name='username' className={styles.input} />
+          </div>
+          <div className={styles.inputGroup}>
+            <span>رمز عبور</span>
+            <div className={styles.passwordContainer}>
+              <input
+                type={isPasswordVisible ? 'text' : 'password'}
+                name='password'
+                className={`${styles.passwordInput} ${styles.input}`}
+              />
+              <Image
+                width={333}
+                height={444}
+                src={isPasswordVisible ? eyeClose : eyeIcon}
+                alt={isPasswordVisible ? 'Hide password' : 'Show password'}
+                className={styles.inputIcon}
+                onClick={togglePasswordVisibility}
+              />
+            </div>
+            <button type='submit'>ورود</button>
+          </div>
+        </form>
+      </div>
+      <div className={styles.logoSection}>
+        <img src={logo} alt='logo' className={styles.logo} />
+        <div className={styles.sloganContainer}>
+          <img src={slogan} alt='slogan' className={styles.slogan} />
+        </div>
+      </div>
+    </main>
   )
 }
 
-export default Dashboard
+export default Login

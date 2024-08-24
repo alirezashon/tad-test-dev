@@ -1,10 +1,10 @@
 .layout {
   background-color: var(--primary-text-color-blue);
   min-height: 100vh;
-  padding: 10px;
+  padding: 1vh;
   height: 100vh;
   display: flex;
-}
+} 
 
 .layoutContainer {
   display: flex;
