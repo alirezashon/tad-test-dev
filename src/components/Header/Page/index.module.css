@@ -1,0 +1,12 @@
+
+.pageHeader {
+    color: #d80546;
+    background: #ffe9f0;
+    width: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: var(--page-header-font-size);
+  }

@@ -1,0 +1,9 @@
+.footerCopyright {
+    background: white;
+    width: max-content;
+    padding: 0 20px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }

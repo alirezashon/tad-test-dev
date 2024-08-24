@@ -1,0 +1,32 @@
+.menuContainer {
+    width: 60px;
+    padding: 10px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 97vh;
+    max-height: 97vh;
+    position: absolute;
+  }
+  
+  .menuContainerImage {
+    width: 40px;
+  }
+  
+  .menuContainer li {
+    list-style: none;
+  }
+  
+  .menuList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .menuLogout {
+    margin-top: auto;
+    height: 45px;
+  }
+  

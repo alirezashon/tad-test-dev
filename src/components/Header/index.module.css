@@ -1,0 +1,12 @@
+.headerContainer {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .headerLogo {
+    width: 145px;
+    margin-right: 90px;
+  }

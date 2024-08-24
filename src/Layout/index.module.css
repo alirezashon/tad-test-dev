@@ -1,0 +1,31 @@
+.layout {
+  background-color: var(--primary-text-color-blue);
+  min-height: 100vh;
+  padding: 10px;
+  height: 100vh;
+  display: flex;
+}
+
+.layoutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.mainContainer {
+  background: white;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: auto;
+  height: 83vh;
+  margin-bottom: 30px;
+  margin-right: 70px;
+  padding: 5px;
+}
+
+.loadingFooter {
+}
+.loadingHeader {
+}
+.loadingMenu {
+}
