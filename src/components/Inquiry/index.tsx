@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PageHeader from '../Header/Page'
 import { handleAccess } from '../../constants/functions'
 import FormHeader from '../Form/Header'
 import { getPlateInquiry } from '../../utils/User'
 import styles from './index.module.css'
 import Image from 'next/image'
+import { Toast } from 'primereact/toast'
+import { ResInfo } from '@/interfaces'
+import FormShow from './FormShow'
 
 interface InquiryProps {}
 
@@ -24,12 +27,65 @@ interface PlateInquiryForm extends HTMLFormElement {
 }
 
 const Inquiry: React.FC<InquiryProps> = () => {
-
+  const [inputValues, setInputValues] = useState({
+    country1: '',
+    country2: '',
+    part2num1: '',
+    part2num2: '',
+    part2num3: '',
+    plateLetter: '',
+    part1num1: '',
+    part1num2: '',
+  })
+  const [response, setRespoonse] = useState<ResInfo | null>()
   const formRef = useRef<PlateInquiryForm | null>(null)
 
+  const toast = useRef<Toast | null>(null)
+
   useEffect(() => {
-    const res = handleAccess('Page1')
+    handleAccess('Page1')
   }, [])
+
+  const handleValidation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    const isNumeric = /^[0-9]*$/.test(value)
+    const isPersian = /^[آ-ی]+$/.test(value)
+    const isValid =
+      name === 'plateLetter'
+        ? isPersian && value.length === 1
+        : isNumeric && value.length <= 1
+
+    if (!isValid) {
+      toast.current?.show({
+        severity: 'error',
+        summary: 'خطای اعتبارسنجی',
+        detail: 'ورودی نامعتبر است. لطفاً فرمت صحیح را وارد کنید.',
+      })
+    } else {
+      // Move to the next input
+      const inputs = formRef.current?.elements
+      if (inputs) {
+        const inputNames = Object.keys(
+          inputs
+        ) as (keyof PlateInquiryFormElements)[]
+        const currentIndex = inputNames.indexOf(
+          name as keyof PlateInquiryFormElements
+        )
+
+        if (currentIndex < inputNames.length - 1) {
+          const nextInput = inputs[
+            inputNames[currentIndex + 1]
+          ] as HTMLInputElement
+          nextInput.focus()
+        }
+      }
+    }
+
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -52,69 +108,168 @@ const Inquiry: React.FC<InquiryProps> = () => {
 
       const pelakPart2 = formElement.elements.plateLetter.value
 
-      console.log('country1', pelakPart1, pelakPart2, pelakPart3, pelakPart4)
+      if (!pelakPart1 || !pelakPart2 || !pelakPart3 || !pelakPart4) {
+        toast.current?.show({
+          severity: 'error',
+          summary: 'خطای فرم',
+          detail: 'لطفاً همه فیلدهای مورد نیاز را به درستی پر کنید.',
+        })
+        return
+      }
 
-      const res = await getPlateInquiry({
-        pelakPart1,
-        pelakPart2,
-        pelakPart3,
-        pelakPart4,
-      })
-
-      console.log(res)
-      localStorage.setItem('inquiryRes', JSON.stringify(res))
+      try {
+        const res = await getPlateInquiry(
+          {
+            pelakPart1,
+            pelakPart2,
+            pelakPart3,
+            pelakPart4,
+          },
+          toast,
+          setRespoonse
+        )
+        setRespoonse(res)
+        localStorage.setItem('inquiryRes', JSON.stringify(res))
+        // location.href = '/caseInsert/personInfo'
+      } catch (error) {
+        toast.current?.show({
+          severity: 'error',
+          summary: 'خطای ارسال',
+          detail: 'خطایی در پردازش درخواست شما رخ داده است.',
+        })
+      }
     }
-
-    location.href = '/caseInsert/personInfo'
   }
 
   return (
     <div className={styles.layoutContainer}>
-      <PageHeader title={'استعلام اولیه'} />
-      <form ref={formRef} onSubmit={handleSubmit} className={styles.mainForm}>
-        <div className={`${styles.formContainer} ${styles.plateForm}`}>
-          <FormHeader text={'شماره پلاک'} />
-          <div className={styles.plateInput}>
-            <div className={styles.plateCountryInputs}>
-              <span>ایران</span>
-              <div className={styles.plateInputs}>
-                <input name='country2' type='text' className={styles.input} />
-                <input name='country1' type='text' className={styles.input} />
+      <Toast ref={toast} />
+      {!response ? (
+        <>
+          <PageHeader title={'استعلام اولیه'} />
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className={styles.mainForm}
+          >
+            <div className={`${styles.formContainer} ${styles.plateForm}`}>
+              <FormHeader text={'شماره پلاک'} />
+              <div className={styles.plateInput}>
+                <div className={styles.plateCountryInputs}>
+                  <span>ایران</span>
+                  <div className={styles.plateInputs}>
+                    <input
+                      type='text'
+                      name='country1'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.country1}
+                    />
+                    <input
+                      type='text'
+                      name='country2'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.country2}
+                    />
+                  </div>
+                </div>
+                <div className={styles.plateMainInputsContainer}>
+                  <div className={styles.plateInputs}>
+                    <input
+                      type='text'
+                      name='part2num1'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.part2num1}
+                    />
+                    <input
+                      type='text'
+                      name='part2num2'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.part2num2}
+                    />
+                    <input
+                      type='text'
+                      name='part2num3'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.part2num3}
+                    />
+                  </div>
+                  <div className={styles.plateLetter}>
+                    <input
+                      type='text'
+                      name='plateLetter'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='rtl'
+                      value={inputValues.plateLetter}
+                    />
+                  </div>
+                  <div className={styles.plateInputs}>
+                    <input
+                      type='text'
+                      name='part1num1'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.part1num1}
+                    />
+                    <input
+                      type='text'
+                      name='part1num2'
+                      onChange={handleValidation}
+                      maxLength={1}
+                      className={styles.input}
+                      dir='ltr'
+                      value={inputValues.part1num2}
+                    />
+                  </div>
+                </div>
+                <div className={styles.blueFlag}>
+                  <Image
+                    width={333}
+                    height={333}
+                    src={'/images/iran.png'}
+                    alt='iran flag'
+                    className={styles.iranFlag}
+                  />
+                  <span>I.R.</span>
+                  <span>IRAN</span>
+                </div>
               </div>
+              <button type='submit' className={styles.button}>
+                استعلام
+              </button>
             </div>
-            <div className={styles.plateMainInputsContainer}>
-              <div className='plateInputs'>
-                <input name='part2num3' type='text' className={styles.input} />
-                <input name='part2num2' type='text' className={styles.input} />
-                <input name='part2num1' type='text' className={styles.input} />
-              </div>
-              <div className={styles.plateLetter}>
-                <input
-                  name='plateLetter'
-                  type='text'
-                  className={styles.input}
-                />
-              </div>
-              <div className={styles.plateInputs}>
-                <input name='part1num2' type='text' className={styles.input} />
-                <input name='part1num1' type='text' className={styles.input} />
-              </div>
-            </div>
-            <div className={styles.blueFlag}>
-              <Image
-                width={333}
-                height={333}
-                src={ '/images/iran.png'}
-                alt='iran flag'
-                className={styles.iranFlag}
-              />
-              <span>I.R.</span>
-              <span>IRAN</span>
-            </div>
-          </div>
-          <button type='submit'>استعلام</button>
+          </form>
+        </>
+      ) : (
+        <div className={styles.formShowBox}>
+          <button
+            type='submit'
+            onClick={() => setRespoonse(null)}
+            className={styles.button}
+          >
+            استعلام جدید
+          </button>
+          <FormShow data={response} />
         </div>
-      </form>
+      )}
     </div>
   )
 }

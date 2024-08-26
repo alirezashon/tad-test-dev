@@ -10,8 +10,8 @@ export const handleAccess = async (pageName:string) => {
    
    
    if( res ){
-    if(res.data.resInfo && res.data.resInfo.length>0){
-      return res.data.resInfo[0].controlDescription	
+    if(res.resInfo && res.resInfo.length>0){
+      return res.resInfo[0].controlDescription	
     }
    }
   } else {

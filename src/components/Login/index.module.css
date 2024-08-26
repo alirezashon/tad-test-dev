@@ -113,4 +113,16 @@
     width: 60%;
     padding: 0 25px;
   }
-  
+  .button {
+    background: var(--primary-text-color-red);
+    color: white;
+    border-radius: 50px;
+    min-width: 100px;
+    font-size: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+  }

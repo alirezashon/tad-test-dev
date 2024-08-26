@@ -8,7 +8,7 @@
   
   .inputContainer input {
     border: 1px solid #757575;
-    border-radius: 10px;
+    border-radius: .7vh;
     height: 30px;
     min-width: 70px;
     width: 170px;

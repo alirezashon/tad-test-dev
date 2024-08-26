@@ -8,11 +8,11 @@ interface TableData {
 }
 
 const sampleData: TableData[] = [
-  { id: 1, name: 'Test 1', description: 'Description 1' },
-  { id: 2, name: 'Test 2', description: 'Description 2' },
-  { id: 3, name: 'Test 3', description: 'Description 3' },
-  { id: 4, name: 'Test 4', description: 'Description 4' },
-  { id: 5, name: 'Test 5', description: 'Description 5' },
+  { id: 1, name: 'تست 1', description: 'توضیحات 1' },
+  { id: 2, name: 'تست 2', description: 'توضیحات 2' },
+  { id: 3, name: 'تست 3', description: 'توضیحات 3' },
+  { id: 4, name: 'تست 4', description: 'توضیحات 4' },
+  { id: 5, name: 'تست 5', description: 'توضیحات 5' },
 ];
 
 const FileManagementTable: React.FC = () => {
