@@ -3,8 +3,10 @@
   background-color: #0099a8;
   border-right: dashed #6ad5de 0.1vh;
   position: fixed;
+  border-radius: 5px;
 }
 .item {
+  border-radius: 5px;
   background: linear-gradient(225deg, #f2feff, #effeff, #f3feff);
   width: 98%;
 }
@@ -21,8 +23,21 @@
 }
 .iconBox {
   margin: 4vh 0;
+  border-bottom: 1px solid rgb(194, 243, 239);
+  border-bottom: 1px solid rgb(220, 231, 231);
+}
+.iconRow{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  justify-content: space-around;
+  color: #025057;
+
 }
 .icon {
+  border-radius: .5vh;
+  padding: .3vh;
   width: 5vh;
   height: 5vh;
 }
@@ -30,10 +45,10 @@
   margin: 0;
 }
 .iconBox:hover {
+  transform: scale(.95);
   cursor: pointer;
-  margin: 2vh 0;
   transition: all 0.5s;
-  border-right: 1px solid rgb(68, 118, 76);
+  border-right: 1px solid rgb(17, 118, 155);
 }
 .iconName {
   font-size: 2vh;

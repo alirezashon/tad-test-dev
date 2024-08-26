@@ -3,7 +3,6 @@ import { UserLogin, UserRole } from '@/interfaces'
 const url = 'https://192.168.1.103'
 
 export const userLogin = async (inputs: UserLogin) => {
-
   try {
     const res = await fetch(`${url}/api/UserMng/userLogin`, {
       method: 'POST',
@@ -28,6 +27,8 @@ export const userLogin = async (inputs: UserLogin) => {
       ) {
         localStorage.setItem('roleName', result.data.resInfo.roleName)
         localStorage.setItem('token', result.data.resInfo.tokenString)
+        // document.cookie = "cookieName=token; path=/; expires=Fri, 31 Dec 2024 23:59:59 GMT; Secure; SameSite=Strict";
+
       }
     }
 
@@ -61,7 +62,6 @@ export const userAccess = async (inputs: UserRole) => {
       }
     } catch (error) {
       console.error('Error sending access request:', error)
-      throw error
     }
   } else {
     console.error('Token not found in localStorage')
@@ -97,7 +97,6 @@ export const getPlateInquiry = async (inputs: any) => {
       }
     } catch (error) {
       console.error('Error sending inquiry request:', error)
-      throw error
     }
   } else {
     console.error('Token not found in localStorage')

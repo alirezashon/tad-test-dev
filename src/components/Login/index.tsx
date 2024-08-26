@@ -64,9 +64,13 @@ const Login = () => {
         </form>
       </div>
       <div className={styles.logoSection}>
-        <img src={logo} alt='logo' className={styles.logo} />
+        <picture>
+          <img src={logo} alt='logo' className={styles.logo} />
+        </picture>
         <div className={styles.sloganContainer}>
-          <img src={slogan} alt='slogan' className={styles.slogan} />
+          <picture>
+            <img src={slogan} alt='slogan' className={styles.slogan} />
+          </picture>
         </div>
       </div>
     </main>

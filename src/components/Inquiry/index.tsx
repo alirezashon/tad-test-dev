@@ -1,49 +1,58 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PageHeader from '../Header/Page'
 import { handleAccess } from '../../constants/functions'
 import FormHeader from '../Form/Header'
 import { getPlateInquiry } from '../../utils/User'
 import styles from './index.module.css'
-const Inquiry = () => {
-  const iranFlag = '/images/iran.png'
+import Image from 'next/image'
+
+interface InquiryProps {}
+
+interface PlateInquiryFormElements extends HTMLFormControlsCollection {
+  country1: HTMLInputElement
+  country2: HTMLInputElement
+  part2num1: HTMLInputElement
+  part2num2: HTMLInputElement
+  part2num3: HTMLInputElement
+  plateLetter: HTMLInputElement
+  part1num1: HTMLInputElement
+  part1num2: HTMLInputElement
+}
+
+interface PlateInquiryForm extends HTMLFormElement {
+  elements: PlateInquiryFormElements
+}
+
+const Inquiry: React.FC<InquiryProps> = () => {
+
+  const formRef = useRef<PlateInquiryForm | null>(null)
 
   useEffect(() => {
     const res = handleAccess('Page1')
-    if (res) {
-      // if it has access continue, if not stop here and say there is no access
-    }
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formElement = e.target
+
+    const formElement = formRef.current
 
     if (formElement) {
-      const formData = new FormData(formElement)
-
-      const country1 = formData.get('country1')
-      const country2 = formData.get('country2')
-
+      const country1 = formElement.elements.country1.value
+      const country2 = formElement.elements.country2.value
       const pelakPart4 = country1 + country2
 
-      const part2num1 = formData.get('part2num1')
-      const part2num2 = formData.get('part2num2')
-      const part2num3 = formData.get('part2num3')
-
+      const part2num1 = formElement.elements.part2num1.value
+      const part2num2 = formElement.elements.part2num2.value
+      const part2num3 = formElement.elements.part2num3.value
       const pelakPart3 = part2num1 + part2num2 + part2num3
 
-      const part1num1 = formData.get('part1num1')
-      const part1num2 = formData.get('part1num2')
-
+      const part1num1 = formElement.elements.part1num1.value
+      const part1num2 = formElement.elements.part1num2.value
       const pelakPart1 = part1num1 + part1num2
 
-      const pelakPart2 = formData.get('plateLetter')
+      const pelakPart2 = formElement.elements.plateLetter.value
 
-      console.log('country1')
-      console.log(pelakPart1)
-      console.log(pelakPart2)
-      console.log(pelakPart3)
-      console.log(pelakPart4)
+      console.log('country1', pelakPart1, pelakPart2, pelakPart3, pelakPart4)
 
       const res = await getPlateInquiry({
         pelakPart1,
@@ -51,8 +60,8 @@ const Inquiry = () => {
         pelakPart3,
         pelakPart4,
       })
-      console.log(res)
 
+      console.log(res)
       localStorage.setItem('inquiryRes', JSON.stringify(res))
     }
 
@@ -62,10 +71,9 @@ const Inquiry = () => {
   return (
     <div className={styles.layoutContainer}>
       <PageHeader title={'استعلام اولیه'} />
-      <form onSubmit={handleSubmit} className={styles.mainForm}>
+      <form ref={formRef} onSubmit={handleSubmit} className={styles.mainForm}>
         <div className={`${styles.formContainer} ${styles.plateForm}`}>
           <FormHeader text={'شماره پلاک'} />
-
           <div className={styles.plateInput}>
             <div className={styles.plateCountryInputs}>
               <span>ایران</span>
@@ -81,23 +89,31 @@ const Inquiry = () => {
                 <input name='part2num1' type='text' className={styles.input} />
               </div>
               <div className={styles.plateLetter}>
-                <input name='plateLetter' type='text' className={styles.input} />
+                <input
+                  name='plateLetter'
+                  type='text'
+                  className={styles.input}
+                />
               </div>
-
               <div className={styles.plateInputs}>
                 <input name='part1num2' type='text' className={styles.input} />
                 <input name='part1num1' type='text' className={styles.input} />
               </div>
             </div>
-
             <div className={styles.blueFlag}>
-              <img src={iranFlag} alt='iran flag' className={styles.iranFlag} />
+              <Image
+                width={333}
+                height={333}
+                src={ '/images/iran.png'}
+                alt='iran flag'
+                className={styles.iranFlag}
+              />
               <span>I.R.</span>
               <span>IRAN</span>
             </div>
           </div>
+          <button type='submit'>استعلام</button>
         </div>
-        <button type='submit'>استعلام</button>
       </form>
     </div>
   )

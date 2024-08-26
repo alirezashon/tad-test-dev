@@ -1,0 +1,70 @@
+.tableContainer {
+    width: 100%;
+    padding: 16px;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .tableTitle {
+    text-align: right;
+    color: #0088cc;
+    margin-bottom: 12px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .table td {
+    background-color: #fafafa;
+  }
+  
+  .tableRow:hover {
+    background-color: #f0f0f0;
+  }
+  
+  @media (max-width: 768px) {
+    .tableContainer {
+      padding: 8px;
+    }
+  
+    .tableTitle {
+      font-size: 18px;
+    }
+  
+    .searchInput {
+      font-size: 14px;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  

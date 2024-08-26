@@ -30,7 +30,13 @@ const Profile = () => {
         </div>
       </Tooltip>
 
-      <img src={profile} alt='profile' className={styles.profileImage} />
+      <Image
+        width={222}
+        height={222}
+        src={profile}
+        alt='profile'
+        className={styles.profileImage}
+      />
     </div>
   )
 }

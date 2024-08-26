@@ -8,7 +8,6 @@ import Image from 'next/image'
 interface Style {
   drawer: CSSProperties
   item: CSSProperties
-  icon: CSSProperties
   iconName: CSSProperties
 }
 interface Props {
@@ -17,7 +16,7 @@ interface Props {
 const Drawer: React.FC<Props> = ({ setDrawerOpen }) => {
   const [drawerWidth, setDrawerWidth] = useState<number>(5)
   const [isMouseOverDrawer, setIsMouseOverDrawer] = useState<boolean>(false)
-const [selectedIconIndex,setSelectedIconIndex] = useState<number>(0)
+  const [selectedIconIndex, setSelectedIconIndex] = useState<number>(0)
   const handleMouseEnter = () => {
     setIsMouseOverDrawer(true)
     setDrawerOpen(true)
@@ -30,7 +29,13 @@ const [selectedIconIndex,setSelectedIconIndex] = useState<number>(0)
 
   useEffect(() => {
     let interval: NodeJS.Timeout
-console.log(window.location.pathname)
+    location.pathname === '/'
+      ? setSelectedIconIndex(1)
+      : location.pathname === '/caseInsert/inquiry'
+      ? setSelectedIconIndex(2)
+      : location.pathname === '/caseInsert/personInfo'
+      ? setSelectedIconIndex(3)
+      : location.pathname === '/caseInsert/carInfo' && setSelectedIconIndex(4)
     if (isMouseOverDrawer) {
       interval = setInterval(() => {
         setDrawerWidth((prev) => Math.min(prev + 2, innerWidth > 999 ? 20 : 44))
@@ -55,12 +60,6 @@ console.log(window.location.pathname)
       zIndex: '3',
     },
     item: {},
-    icon: {
-      width: '100%',
-      display: 'flex',
-      justifyContent: `${drawerWidth < 7 ? 'center' : 'space-around'}`,
-      padding: '0vh',
-    },
     iconName: {
       display: `${drawerWidth > 13 ? 'block' : 'none'}`,
     },
@@ -75,11 +74,13 @@ console.log(window.location.pathname)
     >
       <div style={styles.item} className={externalStyles.item}>
         {drawerWidth < 9 ? (
-          <img
-            src={'/icons/bars.svg'}
-            alt='menuBars'
-            className={externalStyles.menuBars}
-          />
+          <picture>
+            <img
+              src={'/icons/bars.svg'}
+              alt='menuBars'
+              className={externalStyles.menuBars}
+            />
+          </picture>
         ) : (
           <Image
             alt={'بیمه دی - لوگو - جبران خسارت - تاد'}
@@ -88,21 +89,44 @@ console.log(window.location.pathname)
             src={'/images/icon.png'}
             className={externalStyles.headerLogo}
           />
-        )}{' '}
+        )}
         {links.map((link, index) => (
           <div
             className={externalStyles.iconBox}
-            style={styles.icon}
+            style={{
+              width: '100%',
+              display: 'flex',
+              backgroundColor: `${
+                drawerWidth > 9
+                  ? selectedIconIndex === link.key && ' rgb(220, 231, 231)'
+                  : ''
+              }`,
+              justifyContent: `${drawerWidth < 7 ? 'center' : 'space-around'}`,
+              padding: '0vh',
+            }}
+            onClick={() => (location.href = link.to)}
             key={index}
           >
-            <Link href={link.to} key={link.key}>
+            <Link
+              href={link.to}
+              key={link.key}
+              className={externalStyles.iconRow}
+            >
               <Image
                 width={66}
                 height={66}
                 className={externalStyles.icon}
+                style={{
+                  backgroundColor: `${
+                    drawerWidth < 9
+                      ? selectedIconIndex === link.key && 'rgb(220, 231, 231)'
+                      : ''
+                  }`,
+                }}
                 src={link.icon}
                 alt={link.text}
               />
+              {drawerWidth > 9 && <p>{link.text}</p>}
               {/* <span>{link.text}</span> */}
             </Link>
           </div>
