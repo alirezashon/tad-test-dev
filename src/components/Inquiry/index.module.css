@@ -84,24 +84,11 @@
   .plateLetter input {
     width: 60px;
   }
-  .button {
-    background: var(--primary-text-color-red);
-    color: white;
-    border-radius: 50px;
-    min-width: 100px;
-    font-size: 25px;
-    margin-right: auto;
-    margin-left: auto;
-    color: white;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-  }
   .formShowBox{
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
-    height: 70vh;
+    width: 100%;
+    height: 80vh;
   }

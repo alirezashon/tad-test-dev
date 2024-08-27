@@ -1,0 +1,58 @@
+.switchWrapper {
+    margin-top: 1vh;
+    padding: 0.5vh;
+    background: #e0e0e0; 
+    border-radius: 2vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.switch {
+    position: relative;
+    width: 8vh;
+    height: 4vh;
+    appearance: none;
+    outline: none;
+    border: none;
+    background: #de4a4a;
+    border-radius: 2vh;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.switch:before {
+    content: '';
+    position: absolute;
+    width: 3.5vh;
+    height: 3.5vh;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    top: 0.25vh;
+    left: 0.25vh;
+}
+
+.switch:checked {
+    background: #4caf50; /* Green background when checked */
+}
+
+.switch:checked:before {
+    transform: translateX(4vh); /* Move the knob to the right when checked */
+}
+
+.label {
+    padding: 0.5vh 1.5vh;
+    margin: 0 1vh;
+    font-size: 2vh;
+    color: #333; /* Dark text color */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.selectedRadio {
+    color: #4caf50; /* Green text color when selected */
+    font-weight: bold;
+}

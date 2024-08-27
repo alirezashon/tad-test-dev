@@ -1,5 +1,9 @@
+
+
 import { ApiResponse } from '@/interfaces'
-import DataDisplay from '../components/Inquiry/FormShow'
+// import DataDisplay from '../components/Inquiry/FormShow'
+
+import FlowChart from "@/components/FlowChart"
 
 const sampleData: ApiResponse = {
   resCode: 0,
@@ -79,8 +83,14 @@ const sampleData: ApiResponse = {
   resErrPos: 'No errors',
 }
 
-const HomePage: React.FC = () => {
-  return <DataDisplay data={sampleData.resInfo[0]} />
-}
+// const HomePage: React.FC = () => {
+//   return <DataDisplay data={sampleData.resInfo[0]} />
+// }
 
-export default HomePage
+// export default HomePage
+
+
+const HomePage: React.FC = () => {
+  return <FlowChart data={sampleData.resInfo[0]}/>
+  }
+  export default HomePage

@@ -134,6 +134,13 @@ export const getPlateInquiry = async (
         if (result.resInfo && result.resInfo.length > 0) {
           setResponse(result.resInfo[0])
           return result.resInfo[0]
+        }else if(result.resInfo.length === -40){
+  toast.current?.show({
+          severity: 'error',
+          summary: 'پلاک در سیستم موجود نیست',
+          detail: 'ناموفق',
+          life: 3000,
+        })
         }
       } else {
         toast.current?.show({

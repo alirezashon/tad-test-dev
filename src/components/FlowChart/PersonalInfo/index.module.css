@@ -1,0 +1,72 @@
+.container {
+	display: flex;
+	height: 100%;
+	overflow-y: auto;
+	flex-wrap: wrap;
+	gap: 2vh;
+	background-color: #f0f0f0;
+	padding: 3vh 2vw;
+	border-radius: 2vw;
+  }
+  
+  .formGroup {
+	flex: 1;
+	min-width: 20%;
+	margin-bottom: 2vh;
+  }
+  
+  .label {
+	display: block;
+	margin-bottom: 1vh;
+	color: #333;
+	font-size: 2vh;
+  }
+  
+  .input[type='text'],
+  .select {
+	width: 100%;
+	padding: 1.5vh 1vw;
+	border: 0.2vh solid #ccc;
+	border-radius: 1vw;
+	font-size: 2vh;
+  }
+  
+  .switchContainer {
+	display: flex;
+	align-items: center;
+	justify-content:flex-end;
+}
+  
+  .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.4s;
+	border-radius: 4vw;
+  }
+  
+  .slider:before {
+	position: absolute;
+	content: "";
+	height: 3.2vh;
+	width: 3.2vh;
+	left: 0.4vw;
+	bottom: 0.4vh;
+	background-color: white;
+	transition: 0.4s;
+	border-radius: 50%;
+  }
+  
+  .radioContainer {
+	display: flex;
+	gap: 3vw;
+  }
+  
+  .input[type='radio'] {
+	margin-right: 0.5vw;
+	transform: scale(1.5);
+  }

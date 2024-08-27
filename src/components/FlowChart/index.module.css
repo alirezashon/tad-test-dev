@@ -1,0 +1,87 @@
+/** @format */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1.1);
+  }
+}
+
+.header {
+  width: 100%;
+  border-radius: 0 0 2vh 2vh;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to top, #fff1f1, #ffc3c3);
+  color: rgb(158, 0, 0);
+}
+
+.header h2 {
+  padding: 0.2vh 2vh;
+  border-radius: 1vh;
+}
+
+.container {
+  overflow-y: auto;
+  color: rgb(0, 65, 65);
+  width: 100%;
+  height: 99vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flow {
+  width: 90%;
+  height: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2vh;
+  color: rgb(255, 250, 243);
+  background: linear-gradient(to bottom, #f6fdfd, #f3ffff);
+}
+
+.flowBase {
+  background: linear-gradient(rgb(50, 120, 190), rgba(100, 157, 200, 0.9));
+}
+
+.flowDomainActive {
+  background: linear-gradient(
+    rgb(208, 98, 98),
+    rgba(226, 87, 87, 0.812),
+    rgba(169, 52, 52, 0.9)
+  );
+  border: 0.7vh double #cc3a3a;
+}
+
+.flowDomain {
+  background: radial-gradient(
+    rgba(58, 218, 226, 0.7),
+    rgb(26, 149, 155),
+    rgba(104, 203, 245, 0.7)
+  );
+  border: 1vh double rgb(255, 253, 232);
+}
+
+.buttonBox {
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+  background: linear-gradient(
+    rgba(112, 222, 202, 0.4),
+    rgba(44, 198, 182, 0.3)
+  );
+  align-items: center;
+  border-radius: 1vh;
+}
+
+.stateContainer {
+  width: 100%;
+  height: 77%;
+}

@@ -2,84 +2,86 @@ export interface UserLogin {
   username: string
   password: string
 }
+
 export interface UserRole {
   roleName: string
   pageName: string
 }
-interface Edrs {
-  id: any
-  thirdpartyResponseId: any
-  carGrpCod: any
-  cntryCod: any
-  disBdnYrNum: any
-  disFnYrNum: any
-  disFnYrPrcnt: any
-  disLfYrNum: any
-  disLfYrPrcnt: any
-  disPrsnYrNum: any
-  disPrsnYrPrcnt: any
-  edrsCmpDocNo: any
-  edrsTyp: any
-  mtrnum: any
-  plk: any
-  shsNam: any
-  usgCod: any
-  vin: any
-  vehSysCod: any
+
+export interface Edrs {
+  id: number
+  thirdpartyResponseId: number
+  carGrpCod: string
+  cntryCod: string
+  disBdnYrNum: string
+  disFnYrNum: string
+  disFnYrPrcnt: string
+  disLfYrNum: string
+  disLfYrPrcnt: string
+  disPrsnYrNum: string
+  disPrsnYrPrcnt: string
+  edrsCmpDocNo: string
+  edrsTyp: string
+  mtrnum: string
+  plk: string
+  shsNam: string
+  usgCod: string
+  vin: string
+  vehSysCod: string
 }
 
-interface Losses {
-  id: any
-  thirdpartyResponseId: any
-  hancDte: any
-  hpayDte: any
-  losCmpDocNo: any
-  losTyp: any
-  payAmnt: any
+export interface Losses {
+  id: number
+  thirdpartyResponseId: number
+  hancDte: string
+  hpayDte: string
+  losCmpDocNo: string
+  losTyp: string
+  payAmnt: string
 }
 
 export interface ResInfo {
-  id: any
-  userId: any
-  thirdPartyRequestId: any
-  carGrpCod: any
-  cmpCod: any
-  cmpNam: any
-  cntryCod: any
-  disFnYrNum: any
-  disFnYrPrcnt: any
-  disLfYrNum: any
-  disLfYrPrcnt: any
-  disPrsnYrNum: any
-  disPrsnYrPrcnt: any
-  discBdnYrNum: any
-  fndCst: any
-  hbgnDte: any
-  hendDte: any
-  hisuDte: any
-  insNam: any
-  lastCmpCod: any
-  lastCmpDocNo: any
-  mtrNum: any
-  ntnlId: any
-  plcyUnqCod: any
-  plk: any
-  prdDte: any
-  prntCmpDocNo: any
-  shsNum: any
-  typPlcy: any
-  usgCod: any
-  usgNam: any
-  vin: any
-  vehNam: any
-  vehSysCod: any
+  id: number
+  userId: number
+  thirdPartyRequestId: number
+  carGrpCod: string
+  cmpCod: string
+  cmpNam: string
+  cntryCod: string
+  disFnYrNum: string
+  disFnYrPrcnt: string
+  disLfYrNum: string
+  disLfYrPrcnt: string
+  disPrsnYrNum: string
+  disPrsnYrPrcnt: string
+  discBdnYrNum: string
+  fndCst: string
+  hbgnDte: string
+  hendDte: string
+  hisuDte: string
+  insNam: string
+  lastCmpCod: string
+  lastCmpDocNo: string
+  mtrNum: string
+  ntnlId: string
+  plcyUnqCod: string
+  plk: string
+  prdDte: string
+  prntCmpDocNo: string
+  shsNum: string
+  typPlcy: string
+  usgCod: string
+  usgNam: string
+  vin: string
+  vehNam: string
+  vehSysCod: string
   edrses: Edrs[]
   losses: Losses[]
 }
 
 export interface ApiResponse {
-  resCode: any
-  resMessage: any
+  resCode: number
+  resMessage: string
   resInfo: ResInfo[]
-  resErrPos: any
+  resErrPos: string
 }

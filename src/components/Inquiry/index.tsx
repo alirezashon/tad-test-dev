@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { Toast } from 'primereact/toast'
 import { ResInfo } from '@/interfaces'
 import FormShow from './FormShow'
+import FlowChart from '../FlowChart'
 
 interface InquiryProps {}
 
@@ -72,9 +73,9 @@ const Inquiry: React.FC<InquiryProps> = () => {
           name as keyof PlateInquiryFormElements
         )
 
-        if (currentIndex < inputNames.length - 1) {
+        if (currentIndex <= inputNames.length - 1) {
           const nextInput = inputs[
-            inputNames[currentIndex + 1]
+            inputNames[currentIndex - 1]
           ] as HTMLInputElement
           nextInput.focus()
         }
@@ -252,7 +253,7 @@ const Inquiry: React.FC<InquiryProps> = () => {
                   <span>IRAN</span>
                 </div>
               </div>
-              <button type='submit' className={styles.button}>
+              <button type='submit' className={'button'}>
                 استعلام
               </button>
             </div>
@@ -263,11 +264,14 @@ const Inquiry: React.FC<InquiryProps> = () => {
           <button
             type='submit'
             onClick={() => setRespoonse(null)}
-            className={styles.button}
+            style={{position:'absolute',top:'20px'}}
+            className={'button' }
           >
             استعلام جدید
           </button>
-          <FormShow data={response} />
+          {/* <FormShow data={response} /> */}
+          
+          <FlowChart data={response} />
         </div>
       )}
     </div>
